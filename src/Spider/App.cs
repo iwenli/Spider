@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spider.Sample;
+using System;
 
 namespace Spider
 {
@@ -17,7 +18,11 @@ namespace Spider
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Console.WriteLine("按任意键退出...");
+			//new SinaNewsSpider().Run();
+			//new CnblogsSpider().Run();
+			CrawlerWholeSiteSpider.Run();
+
+			Console.WriteLine("按任意键退出...");
             Console.Read();
         }
     }
