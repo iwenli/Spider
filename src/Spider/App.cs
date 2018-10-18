@@ -20,7 +20,14 @@ namespace Spider
         {
 			//new SinaNewsSpider().Run();
 			//new CnblogsSpider().Run();
-			CrawlerWholeSiteSpider.Run();
+
+			//CrawlerWholeSiteSpider.Run();  //XXXX
+
+
+			//new CtripCitySpider().Run();
+
+			CustmizeProcessorAndPipelineSpider.Run();
+
 
 			Console.WriteLine("按任意键退出...");
             Console.Read();

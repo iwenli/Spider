@@ -15,15 +15,15 @@ namespace Spider.Sample
 		public static void Run()
 		{
 			var  spider = DotnetSpider.Core.Spider.Create(
-				// use memoery queue scheduler
+				// 使用内存队列调度程序
 				new QueueDuplicateRemovedScheduler(),
-				// default page processor will save whole html, and extract urls to target urls via regex
+				// 默认页面处理器将保存整个html，并通过正则表达式将URL提取到目标URL
 				new DefaultPageProcessor
 				{
 					Filter = new PatternFilter(new[] { "cnblogs\\.com" }),
 					RequestExtractor = new XPathRequestExtractor(".")
 				})
-				// save crawler result to file in the folder: \{running directory}\data\{crawler identity}\{guid}.dsd
+				// 将抓取工具结果保存到文件夹中的文件：\ {running directory} \ data \ {crawler identity} \ {guid} .dsd
 				.AddPipeline(new FilePipeline());
 
 			// dowload html by http client
@@ -38,7 +38,7 @@ namespace Spider.Sample
 			// stop crawler if it can't get url from the scheduler after 30000 ms 当爬虫连续30秒无法从调度中心取得需要采集的链接时结束.
 			spider.EmptySleepTime = 30000;
 			// Set start/seed url
-			spider.AddRequests("http://www.cnblogs.com/");
+			spider.AddRequests("https://www.cnblogs.com/");
 			// start crawler 启动爬虫
 			spider.Run();
 		}
