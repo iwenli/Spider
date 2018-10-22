@@ -1,5 +1,6 @@
 ﻿using Spider.Sample;
 using System;
+using System.Threading.Tasks;
 
 namespace Spider
 {
@@ -26,7 +27,17 @@ namespace Spider
 
 			//new CtripCitySpider().Run();
 
-			CustmizeProcessorAndPipelineSpider.Run();
+			//CustmizeProcessorAndPipelineSpider.Run();
+
+
+			//CustomizeFormatterSpider.Run();
+
+			DataHandlerSpider.Run();
+
+
+			//Task.Run(()=>{ });
+
+			//Task.Factory.StartNew(() => { });
 
 
 			Console.WriteLine("按任意键退出...");
