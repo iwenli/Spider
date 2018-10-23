@@ -32,7 +32,9 @@ namespace Spider
 
 			//CustomizeFormatterSpider.Run();
 
-			DataHandlerSpider.Run();
+			//DataHandlerSpider.Run();  //XX
+
+			EntityModelSpider.Run();
 
 
 			//Task.Run(()=>{ });
