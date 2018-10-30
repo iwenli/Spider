@@ -1,4 +1,5 @@
-﻿using Spider.Sample;
+﻿using Spider.Demo;
+using Spider.Sample;
 using System;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace Spider
 			//new SinaNewsSpider().Run();
 			//new CnblogsSpider().Run();
 
-			//CrawlerWholeSiteSpider.Run();  //XXXX
+			//			CrawlerWholeSiteSpider.Run();  //XXXX
 
 
 			//new CtripCitySpider().Run();
@@ -34,13 +35,13 @@ namespace Spider
 
 			//DataHandlerSpider.Run();  //XX
 
-			EntityModelSpider.Run();
+			//EntityModelSpider.Run();
 
 
 			//Task.Run(()=>{ });
 
 			//Task.Factory.StartNew(() => { });
-
+			new Www78CnSpider().Run();
 
 			Console.WriteLine("按任意键退出...");
             Console.Read();

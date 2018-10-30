@@ -14,17 +14,17 @@ namespace Spider.Sample
 	{
 		public static void Run()
 		{
-			var  spider = DotnetSpider.Core.Spider.Create(
+			var spider = DotnetSpider.Core.Spider.Create(
 				// 使用内存队列调度程序
 				new QueueDuplicateRemovedScheduler(),
 				// 默认页面处理器将保存整个html，并通过正则表达式将URL提取到目标URL
 				new DefaultPageProcessor
 				{
-					Filter = new PatternFilter(new[] { "cnblogs\\.com" }),
-					RequestExtractor = new XPathRequestExtractor(".")
+					Filter = new PatternFilter("^http://www\\.cnblogs\\.com/$", "http://www\\.cnblogs\\.com/sitehome/p/\\d+"),
+					RequestExtractor = new XPathRequestExtractor(".//div[@class='pager']")
 				})
 				// 将抓取工具结果保存到文件夹中的文件：\ {running directory} \ data \ {crawler identity} \ {guid} .dsd
-				.AddPipeline(new FilePipeline());
+				.AddPipeline(new ConsolePipeline());
 
 			// dowload html by http client
 			spider.Downloader = new HttpClientDownloader();
