@@ -20,28 +20,11 @@ namespace Spider
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-			//new SinaNewsSpider().Run();
-			//new CnblogsSpider().Run();
-
-			//			CrawlerWholeSiteSpider.Run();  //XXXX
-
-
-			//new CtripCitySpider().Run();
-
-			//CustmizeProcessorAndPipelineSpider.Run();
-
-
-			//CustomizeFormatterSpider.Run();
-
-			//DataHandlerSpider.Run();  //XX
-
-			//EntityModelSpider.Run();
-
-
 			//Task.Run(()=>{ });
 
 			//Task.Factory.StartNew(() => { });
-			new Www78CnSpider().Run();
+
+			new MySpider().Run();
 
 			Console.WriteLine("按任意键退出...");
             Console.Read();
