@@ -21,6 +21,37 @@ namespace Spider
 {
 	class QCCSpider : EntitySpider
 	{
+		List<string> List = new
+			List<string>
+		{   "上海速时网络科技有限公司"
+			,"武汉振兴鑫诚装饰材料有限公司"
+			,"广州德膳企业管理有限公司"
+			,"佛山市威能建材有限公司	"
+			,"湖北澳克玛农业有限公司	"
+			,"秦皇岛合纵力餐饮管理有限公司"
+			,"湖北一池天下生态农业科技有限公司"
+			,"江苏欧象万盛木业有限公司"
+			,"湖南芯瑞通光电科技有限公司"
+			,"北京汉釜宫国际餐饮管理有限公司	"
+			,"昆明闺蜜内衣有限公司	"
+			,"中创时代(北京)国际投资管理有限公司	"
+			,"北京瑞科同创能源科技有限公司	"
+			,"惠州市中天阳光电力光伏有限公司	"
+			,"秦皇岛合纵力餐饮管理有限公司	"
+			,"昆明西汇农业科技有限公司	"
+			,"山东普达企业管理咨询有限公司	"
+			,"江苏盐城宏凯鹅苗孵化中心	"
+			,"重庆泉佳喜餐饮文化有限公司	"
+			,"南京九州盛世餐饮管理有限公司	"
+			,"湖北妙农农产品有限公司	"
+			,"秦皇岛合纵力科技开发有限公司	"
+			,"昆明西汇农业科技有限公司	"
+			,"广州德膳企业管理有限公司	"
+			,"济南瑞粮餐饮管理有限公司	"
+			,"上海郁隆禾餐饮管理有限公司	"
+			,"浙江食叁味餐饮管理有限公司	"
+			,"上海速时网络科技有限公司	"};
+
 		protected override void OnInit(params string[] arguments)
 		{
 			Identity = ("QCCSpider_" + DateTime.Now.ToString("yyyy_MM_dd_HHmmss"));
@@ -31,8 +62,11 @@ namespace Spider
 			//AddPipeline(new SqlServerEntityPipeline());
 
 			AddPageProcessor(new MyProcessor());
+			foreach (var item in List)
+			{
+				AddRequests("https://www.qichacha.com/search?key=" + item.Trim());
+			}
 
-			AddRequests("https://www.qichacha.com/search?key=上海速时网络科技有限公司");
 
 			AddEntityType<QCCEntity>();
 		}
@@ -57,12 +91,12 @@ namespace Spider
 				{
 					page.AddResultItem("QCCEntity", new QCCEntity
 					{
-						Name = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[1]/h1"))?.GetValue()?.Trim()??"",
-						Mobile = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[3]/span[1]/span[2]/span"))?.GetValue()?.Trim()??"",
-						WebSite = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[3]/span[3]/a[1]/@href"))?.GetValue()?.Trim()??"",
-						Email = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[4]/span[1]/span[2]/a[1]"))?.GetValue()?.Trim()??"",
-						Address = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[4]/span[3]/a[1]"))?.GetValue()?.Trim()??"",
-						Introduction = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[5]/span[2]"))?.GetValue()?.Trim()??"",
+						Name = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[1]/h1"))?.GetValue()?.Trim() ?? "",
+						Mobile = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[3]/span[1]/span[2]/span"))?.GetValue()?.Trim() ?? "",
+						WebSite = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[3]/span[3]/a[1]/@href"))?.GetValue()?.Trim() ?? "",
+						Email = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[4]/span[1]/span[2]/a[1]"))?.GetValue()?.Trim() ?? "",
+						Address = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[4]/span[3]/a[1]"))?.GetValue()?.Trim() ?? "",
+						Introduction = page.Selectable().Select(Selectors.XPath("//div[@id='company-top']/div[1]/div[2]/div[5]/span[2]"))?.GetValue()?.Trim() ?? "",
 
 						RegisteredCapital = page.Selectable().Select(Selectors.XPath("//*[@id='Cominfo']/table[2]/tbody/tr[1]/td[2]"))?.GetValue()?.Trim() ?? "",
 						PaidInCapital = page.Selectable().Select(Selectors.XPath("//*[@id='Cominfo']/table[2]/tbody/tr[1]/td[4]"))?.GetValue()?.Trim() ?? "",
@@ -165,7 +199,7 @@ namespace Spider
 			/// <summary>
 			/// 公司类型
 			/// </summary>
-			public string Type { set; get; } 
+			public string Type { set; get; }
 			/// <summary>
 			/// 行业
 			/// </summary>

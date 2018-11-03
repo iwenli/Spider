@@ -20,9 +20,9 @@ namespace Spider.Demo
 		protected override void OnInit(params string[] arguments)
 		{
 			Identity = ("hao315_" + DateTime.Now.ToString("yyyy_MM_dd_HHmmss"));
-			//AddPipeline(new ConsoleEntityPipeline());
+			AddPipeline(new ConsoleEntityPipeline());
 			//AddPipeline(new JsonFileEntityPipeline());
-			AddPipeline(new SqlServerEntityPipeline());
+			//AddPipeline(new SqlServerEntityPipeline());
 
 			AddRequests("http://www.hao315.com/paihangbang/index/1");
 			AddEntityType<WwwHao315ComEntify>()
@@ -33,9 +33,8 @@ namespace Spider.Demo
 			//AddEntityType<Www78CnEntify>().SetRequestExtractor(new XPathRequestExtractor(".//div[@class='pager']")).Filter = new PatternFilter("www\\.cnblogs\\.com/");
 		}
 
-
 	}
-	[Entity(Expression = "//div[@class='right_text']/ul")]
+	[Entity(Expression = "//div[@class='right_text']/ul[not(@class)]")]
 	class WwwHao315ComEntify : JMEntity
 	{
 		[Column]

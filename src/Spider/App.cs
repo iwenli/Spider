@@ -24,11 +24,11 @@ namespace Spider
 
 			//Task.Factory.StartNew(() => { });
 
-			//new MySpider().Run();
+			new MySpider().Run();
 
 
 			//MyDownloader.GetHtml();
-			new QCCSpider().Run();
+			//new QCCSpider().Run();
 
 			Console.WriteLine("按任意键退出...");
             Console.Read();
