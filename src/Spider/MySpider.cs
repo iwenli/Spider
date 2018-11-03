@@ -14,8 +14,9 @@ namespace Spider
 		{
 			Identity = ("MySpider_" + DateTime.Now.ToString("yyyy_MM_dd_HHmmss"));
 			//AddPipeline(new ConsoleEntityPipeline());
-			//AddPipeline(new JsonFileEntityPipeline());
+			AddPipeline(new JsonFileEntityPipeline());
 			AddPipeline(new SqlServerEntityPipeline());
+
 
 			AddRequests("http://www.hao315.com/paihangbang/index/1");
 			AddEntityType<WwwHao315ComEntify>()
