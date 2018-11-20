@@ -8,8 +8,8 @@ namespace Spider.Demo
 {
 	/// <summary>
 	/// 加盟项目实体基类
-
-	[Schema("bds260192675_db", "spider_zsjm", TableNamePostfix.Today)]
+	/// </summary>
+	[Schema("MerchantsJoin", "spider", TableNamePostfix.Today)]
 	class JMEntity : BaseEntity
 	{
 		/// <summary>

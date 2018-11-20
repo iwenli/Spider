@@ -345,6 +345,7 @@ namespace {Namespace}
 				ConnectionString = _connectionString,
 				DbType = _dbType,
 				IsAutoCloseConnection = blnIsAutoCloseConnection,
+				//InitKeyType = InitKeyType.SystemTable,
 				ConfigureExternalServices = new ConfigureExternalServices()
 				{
 					//DataInfoCacheService = new HttpRuntimeCache()
