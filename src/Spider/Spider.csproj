@@ -9,8 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="DotnetSpider.Core" Version="3.0.6" />
-    <PackageReference Include="DotnetSpider.Extension" Version="3.0.7" />
-    <PackageReference Include="sqlSugarCore" Version="4.8.1" />
+    <PackageReference Include="DotnetSpider.Extension" Version="3.0.6" />
+    <PackageReference Include="sqlSugarCore" Version="4.8.5" />
   </ItemGroup>
 
   <ItemGroup>

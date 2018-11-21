@@ -62,7 +62,6 @@ namespace Spider.Sample
 		protected override void CheckArguments()
 		{
 		}
-
 		protected override object FormateValue(object value)
 		{
 			return "";

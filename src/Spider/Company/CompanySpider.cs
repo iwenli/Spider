@@ -1,25 +1,22 @@
 ﻿using DotnetSpider.Extension;
-using DotnetSpider.Extension.Pipeline;
+using Microsoft.Extensions.Logging;
 using Spider.Demo;
 using Spider.Repository;
 using SqlSugar;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Text;
 
 namespace Spider.Company
 {
 	class CompanySpider : EntitySpider
 	{
-		public static int SleepValue = 10;
+		public static int SleepValue = 5;
 
 		public static string CurrentCompany = "";
+		public static string NextCompany = "";
 
 		static ConcurrentQueue<string> CompanyNameQueue;
-
 
 		protected override void OnInit(params string[] arguments)
 		{
@@ -33,16 +30,10 @@ namespace Spider.Company
 			AddPipeline(new CompanyPipeline());
 			AddPageProcessor(new CompanyProcessor());
 
-			var _url = GetSearchUrl();
-			if (_url.Length > 0)
-			{
-				AddRequests(_url);
-			}
+			AddRequests("https://www.qichacha.com/search?key=石头剪刀布地址电饭锅电饭锅电饭锅电饭锅多个");
 			AddEntityType<CompanyEntity>();
 		}
-
-
-
+		 
 		void InitData()
 		{
 			var _client = new BaseRepository<JMEntity>();
@@ -57,16 +48,23 @@ namespace Spider.Company
 			var _list = _listSugar.ToList();
 			CompanyNameQueue = new ConcurrentQueue<string>(_list.Select(m => m.Trim()));
 
-			Console.WriteLine($"待处理企业：{CompanyNameQueue.Count} 条");
+			Logger.Log(LogLevel.Information, 1, this, null,
+						(a, b) =>
+						{
+							return $"[爬虫]待处理企业：{CompanyNameQueue.Count} 条";
+						});
 		}
 		public static string GetSearchUrl()
 		{
-			CurrentCompany = "";
-			if (CompanyNameQueue.TryDequeue(out CurrentCompany))
+			CurrentCompany = NextCompany;
+			NextCompany = "";
+			if (CompanyNameQueue.TryDequeue(out NextCompany))
 			{
-				if (CurrentCompany != null && CurrentCompany.Length > 2)
+				if (NextCompany != null && NextCompany.Length > 2)
 				{
-					return "https://www.qichacha.com/search?key=" + CurrentCompany.Trim();
+					var _url = "https://www.qichacha.com/search?key=" + NextCompany.Trim();
+					Console.WriteLine($"[爬虫]添加链接: {_url}");
+					return _url;
 				}
 			}
 			return "";
