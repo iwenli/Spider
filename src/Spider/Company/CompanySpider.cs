@@ -16,6 +16,8 @@ namespace Spider.Company
 	{
 		public static int SleepValue = 10;
 
+		public static string CurrentCompany = "";
+
 		static ConcurrentQueue<string> CompanyNameQueue;
 
 
@@ -50,7 +52,7 @@ namespace Spider.Company
 				.AS("spider_obj")
 				.Where(m => m.Company != "")
 				.Where(m => SqlFunc.Subqueryable<CompanyEntity>().Where(s => s.Name == m.Company).NotAny())
-				.GroupBy(m => m.Company).OrderBy(m=>m.Company,OrderByType.Desc).Select(m => m.Company.Trim());
+				.GroupBy(m => m.Company).OrderBy(m => m.Company, OrderByType.Desc).Select(m => m.Company.Trim());
 
 			var _list = _listSugar.ToList();
 			CompanyNameQueue = new ConcurrentQueue<string>(_list.Select(m => m.Trim()));
@@ -59,16 +61,15 @@ namespace Spider.Company
 		}
 		public static string GetSearchUrl()
 		{
-			var _key = "";
-			if (CompanyNameQueue.TryDequeue(out _key))
+			CurrentCompany = "";
+			if (CompanyNameQueue.TryDequeue(out CurrentCompany))
 			{
-				if (_key != null && _key.Length > 2)
+				if (CurrentCompany != null && CurrentCompany.Length > 2)
 				{
-					_key = "https://www.qichacha.com/search?key=" + _key.Trim();
+					return "https://www.qichacha.com/search?key=" + CurrentCompany.Trim();
 				}
 			}
-			return _key;
+			return "";
 		}
-
 	}
 }

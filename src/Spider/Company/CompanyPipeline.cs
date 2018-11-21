@@ -24,14 +24,15 @@ namespace Spider.Company
 			foreach (var data in datas)
 			{
 				var _entity = data as CompanyEntity;
+				_entity.Seed = CompanySpider.CurrentCompany;
 				try
 				{
 					var result = Repository.Add(_entity).Result;
-					Console.WriteLine($"抽取数据[{result}]: {_entity.ToString()}");
+					Console.WriteLine($"[管道][{result}-{_entity.Seed}]: {_entity.ToString()}");
 				}
 				catch (Exception ex)
 				{
-					Console.WriteLine($"抽取数据异常:{_entity.ToString()}  {ex.Message}");
+					Console.WriteLine($"[管道][{_entity.Seed}]异常:{_entity.ToString()}  {ex.Message}");
 				}
 			}
 

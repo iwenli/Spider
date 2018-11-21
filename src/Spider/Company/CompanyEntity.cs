@@ -109,6 +109,12 @@ namespace Spider.Company
 		[SugarColumn(ColumnName = "add_time", IsNullable = true)]
 		public long AddTime { set; get; } = DateTime.Now.ConvertToTimeStamp();
 
+		/// <summary>
+		/// 种子企业名称
+		/// </summary>
+		[SugarColumn(ColumnName = "seed", IsNullable = false, Length = 100)]
+		public string Seed { set; get; }
+
 		public override string ToString()
 		{
 			return $"名称：{Name} 状态：{Status} 联系人：{ContactName} 电话：{Tel}";
