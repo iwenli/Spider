@@ -33,8 +33,23 @@ namespace Spider
 			//_context.CreateTableByEntity(false, typeof(CompanyEntity));
 
 			//new MySpider().Run();
-
 			new CompanySpider().Run();
+
+			//var _html = MyDownloader.GetHtml();
+
+			//var _company = new CompanySpider();
+			//_company.InitData();
+			//while (true)
+			//{
+			//	var _name = "";
+			//	if (CompanySpider.CompanyNameQueue.TryDequeue(out _name))
+			//	{
+			//		if (_name != null && _name.Length > 2)
+			//		{
+			//			 _html = MyDownloader.GetHtml(_name);
+			//		}
+			//	}
+			//}
 
 			#region 企查查
 
